@@ -1,0 +1,83 @@
+schema: textile/file-format-ontology/v1
+name: Textile File Format Ontology
+version: "1.0"
+
+principle:
+  data_owner: bonsai/dots
+  textile_role: semantic_domain_and_orchestration
+  canonical_data: dots
+  description: >
+    Textile describes materials, structures, products, machines, processes and
+    providers. Data schemas, APIs and canonical file representations belong to dots.
+
+layers:
+  data:
+    owner: dots
+    formats:
+      canonical: json
+      exchange: csv
+      analytics: parquet
+      visual: [png, bmp, tiff, svg]
+  semantic:
+    owner: textile
+    concepts: [material, structure, product, machine, process, provider, market]
+  integration:
+    owner: textile
+    mechanism: adapter
+
+formats:
+  - id: json
+    class: canonical_data
+    owner: dots
+  - id: yaml
+    class: definition_and_configuration
+    owner: dots
+  - id: csv
+    class: tabular_exchange
+    owner: dots
+  - id: parquet
+    class: analytical_data
+    owner: dots
+  - id: png
+    class: image
+    owner: dots
+  - id: svg
+    class: vector_image
+    owner: dots
+  - id: wif
+    class: weaving_interchange
+    domain: weaving
+    adapter_owner: textile
+  - id: tc2-bitmap
+    class: machine_format
+    domain: weaving
+    adapter_owner: textile
+
+transformations:
+  - from: dots/pixel-grid
+    to: textile/weave-draft
+  - from: textile/weave-draft
+    to: wif
+  - from: textile/weave-draft
+    to: tc2-bitmap
+  - from: dots/pixel-grid
+    to: textile/stitch-pattern
+  - from: dots/pixel-grid
+    to: textile/garment-pattern
+
+external_tools:
+  weaving:
+    - adacad
+    - fiberworks
+    - weavepoint
+    - weaveit
+  knitting:
+    - knitting-machine-tools
+  embroidery:
+    - embroidery-machine-tools
+
+contract:
+  api: dots/openapi.yaml
+  mcp: dots
+  runtime: go
+  rule: textile-adapters-must-consume-dots-contract
