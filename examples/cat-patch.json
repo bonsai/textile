@@ -1,0 +1,25 @@
+{
+  "version": "0.1",
+  "id": "cat-patch-001",
+  "name": "Cat Patch",
+  "source": {"type": "image", "uri": "source/cat.png"},
+  "geometry": {"width_mm": 60, "height_mm": 50, "units": "mm"},
+  "colors": [
+    {"id": "black", "hex": "#222222"},
+    {"id": "white", "hex": "#ffffff"}
+  ],
+  "objects": [
+    {
+      "id": "body",
+      "type": "fill",
+      "geometry": {"kind": "path", "ref": "vector/body"},
+      "color": "black",
+      "technique": "satin",
+      "parameters": {"density": 0.45}
+    }
+  ],
+  "production": {
+    "domain": "patch",
+    "output_formats": ["dst", "pes", "jef"]
+  }
+}
