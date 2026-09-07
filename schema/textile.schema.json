@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/bonsai/textile/schema/textile.schema.json",
+  "title": "Textile Design IR",
+  "type": "object",
+  "required": ["version", "id", "design", "geometry", "colors", "production"],
+  "properties": {
+    "version": {"type": "string"},
+    "id": {"type": "string"},
+    "name": {"type": "string"},
+    "source": {
+      "type": "object",
+      "properties": {
+        "type": {"enum": ["image", "svg", "drawing", "generated", "manual"]},
+        "uri": {"type": "string"},
+        "hash": {"type": "string"}
+      },
+      "additionalProperties": true
+    },
+    "geometry": {
+      "type": "object",
+      "required": ["width_mm", "height_mm"],
+      "properties": {
+        "width_mm": {"type": "number", "exclusiveMinimum": 0},
+        "height_mm": {"type": "number", "exclusiveMinimum": 0},
+        "units": {"const": "mm"}
+      }
+    },
+    "colors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "hex"],
+        "properties": {
+          "id": {"type": "string"},
+          "hex": {"type": "string"},
+          "name": {"type": "string"}
+        }
+      }
+    },
+    "objects": {
+      "type": "array",
+      "items": {"$ref": "object.schema.json"}
+    },
+    "material": {"type": "object"},
+    "production": {
+      "type": "object",
+      "properties": {
+        "domain": {"enum": ["knit", "embroidery", "patch", "sticker", "sewing", "print", "other"]},
+        "machine": {"type": "string"},
+        "output_formats": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  },
+  "additionalProperties": true
+}
