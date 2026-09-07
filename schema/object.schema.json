@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/bonsai/textile/schema/object.schema.json",
+  "title": "Textile Design Object",
+  "type": "object",
+  "required": ["id", "type", "geometry"],
+  "properties": {
+    "id": {"type": "string"},
+    "type": {"enum": ["path", "fill", "line", "point", "text", "stitch_region", "knit_region"]},
+    "geometry": {"type": "object"},
+    "color": {"type": "string"},
+    "technique": {"type": "string"},
+    "parameters": {"type": "object"}
+  },
+  "additionalProperties": true
+}
